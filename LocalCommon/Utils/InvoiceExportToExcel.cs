@@ -108,7 +108,7 @@ namespace LocalCommon.Utils
             headerRowData = new List<string[]>()
   {
     new string[] { "Minutes",lineInvoice.Minutes.ToString(), "Minutes Left In Package", lineInvoice.MinutesLeftInPackage.ToString(),
-        "Package % Usage", lineInvoice.PackagePercentUsage.ToString()}
+        "Package % Usage", lineInvoice.PackagePercentUsage.ToString()+"%"}
   };
             headerRangeData = "B6:" + Char.ConvertFromUtf32(headerRowData[0].Length + 64) + "6";
             worksheet.Cells[headerRangeData].LoadFromArrays(headerRowData);

@@ -61,6 +61,7 @@
                                             <StackPanel Orientation="Horizontal" Grid.Column="2">
                                                 <TextBlock Foreground="Navy" Text="Package % Usage: "/>
                                                 <TextBlock Foreground="Navy" Text="{Binding PackagePercentUsage}"/>
+                                                <TextBlock Foreground="Navy" Text="%"/>
                                             </StackPanel>
                                             <TextBlock Grid.Row="1" Foreground="Navy" Text="Package Price: "/>
                                             <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding PackagePrice}"/>

@@ -212,6 +212,10 @@ namespace LocalCommon.DAL
                         throw new APIServerError(resultContent);
 
                     default:
+                        var task1 = result.Content.ReadAsStringAsync();
+                        task1.Wait();
+                        string resultContent1 = task1.Result;
+                        Console.WriteLine(resultContent1);
                         throw new APIUnhandledHttpStatusCodeException(result.StatusCode);
                 }
             }

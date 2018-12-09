@@ -24,11 +24,14 @@ namespace CustomerService.Views
         public Login()
         {
             InitializeComponent();
+            //set the view model to call back with logged user details when it's ready
             ((LoginViewModel)DataContext).AcceptCallBack = OnAccept;
         }
 
         private bool OnAccept(int userId)
         {
+            //navigate to main menu with logged in user's details to further pass its info to
+            //needed pages
             NavigationService.Navigate(new MainMenu(userId));
             return true;
         }
@@ -40,6 +43,7 @@ namespace CustomerService.Views
 
         private void NavigationService_Navigating(object sender, NavigatingCancelEventArgs e)
         {
+            //disable Forward button so that we user won't bypass login page
             if (e.NavigationMode == NavigationMode.Forward)
                 e.Cancel = true;
         }

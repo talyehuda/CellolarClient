@@ -9,32 +9,32 @@ using System.Web.Script.Serialization;
 
 namespace LocalCommon.DAL
 {
-
-
-
+    
     public class WebAPIAccess
     {
 
-
+        //key in app.config that holds api server address
         private string apiServerAddress_Key = null;
         private Uri apiServerUrl = null;
 
+
         public WebAPIAccess(string controller)
         {
-
             apiServerAddress_Key = "apiServerAddress";
             apiServerUrl = new Uri(ConfigurationManager.AppSettings[apiServerAddress_Key] + $"api/{controller}/");
 
         }
-
+        /// <summary>
+        ///performs http get request and discards returned content 
+        ///unless an error is returned, then an exception is thrown
+        /// with the content saved in error's message
+        /// </summary>
         public void GetData(string query)
         {
-
-
             using (var client = new HttpClient())
             {
                 client.BaseAddress = apiServerUrl;
-                //HTTP GET
+
                 var responseTask = client.GetAsync(query);
                 try
                 {
@@ -62,6 +62,11 @@ namespace LocalCommon.DAL
             }
         }
 
+        /// <summary>
+        ///performs http get request and returns content as a Model object
+        ///unless an error is returned, then an exception is thrown
+        /// with the content saved in error's message
+        /// </summary>
         public Model GetData<Model>(string query)
         {
 
@@ -69,7 +74,7 @@ namespace LocalCommon.DAL
             using (var client = new HttpClient())
             {
                 client.BaseAddress = apiServerUrl;
-                //HTTP GET
+
                 var responseTask = client.GetAsync(query);
                 try
                 {
@@ -110,6 +115,11 @@ namespace LocalCommon.DAL
             }
         }
 
+        /// <summary>
+        ///performs http post request on a Model object and returns content as a Repons object
+        ///unless an error is returned, then an exception is thrown
+        /// with the content saved in error's message
+        /// </summary>
         public Response PostData<Response, Model>(string query, Model model)
         {
 
@@ -161,6 +171,11 @@ namespace LocalCommon.DAL
 
         }
 
+        /// <summary>
+        ///performs http post request on a Model object and discards response content
+        ///unless an error is returned, then an exception is thrown
+        /// with the content saved in error's message
+        /// </summary>
         public void PostData<Model>(string query, Model model)
         {
 
@@ -191,18 +206,15 @@ namespace LocalCommon.DAL
                         return;
 
                     case System.Net.HttpStatusCode.MethodNotAllowed:
-                        throw new APIServerError();
+                        var task = result.Content.ReadAsStringAsync();
+                        task.Wait();
+                        string resultContent = task.Result;
+                        throw new APIServerError(resultContent);
 
                     default:
                         throw new APIUnhandledHttpStatusCodeException(result.StatusCode);
                 }
-
-
             }
-
         }
-
-
-
     }
 }

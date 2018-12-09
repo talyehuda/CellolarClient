@@ -29,6 +29,7 @@ namespace CustomerService.Views
         {
 
         }
+        //called by Reciept model with invoice data
         public ReceiptResult(ClientInvoice clientInvoice)
         {
             _clientInvoice = clientInvoice;
@@ -36,6 +37,7 @@ namespace CustomerService.Views
             
             var dataContext = ((ReceiptResultViewModel)DataContext);
             if (dataContext != null)
+                //pass invoice data to the view model
                 dataContext.ClientInvoice = clientInvoice;
         }
         

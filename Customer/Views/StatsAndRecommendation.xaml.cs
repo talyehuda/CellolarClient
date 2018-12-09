@@ -29,6 +29,7 @@ namespace Customer.Views
         public StatsAndRecommendation(int? clientId)
         {
             InitializeComponent();
+            //pass client id to the view model
             ((StatsAndRecommendationViewModel)DataContext).ClientId = clientId;
         }
     }

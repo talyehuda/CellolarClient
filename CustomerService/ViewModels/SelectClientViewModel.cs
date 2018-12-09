@@ -45,6 +45,7 @@ namespace CustomerService.ViewModels
             }
         }
         public IList<int> ClientIdNumbers { get => _clientIdNumbers; }
+        //view's callback to be called when selected client is ready
         public Action AcceptCallBack { get => _acceptCallBack; set => _acceptCallBack = value; }
         public Action CancelCallBack { get => _cancelCallBack; set => _cancelCallBack = value; }
         public ICommand SelectCommand { get => _selectCommand; }
@@ -72,6 +73,7 @@ namespace CustomerService.ViewModels
 
         private void OnSelect(object parameter)
         {
+            //inform the view that we are ready to pass info about selected client
             _acceptCallBack();
         }
         

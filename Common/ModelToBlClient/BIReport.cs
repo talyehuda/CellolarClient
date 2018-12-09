@@ -13,6 +13,6 @@ namespace Common.ModelToBlClient
         public List<double> TopClientsLastMonthMostValue { get; set; }
         public List<Client> MostCallingToCenterClients { get; set; }
         public List<Employee> BestSellers { get; set; }
-        public List<List<Client>> PotentialGrougs { get; set; }
+        public List<List<string>> PotentialGrougs { get; set; }
     }
 }

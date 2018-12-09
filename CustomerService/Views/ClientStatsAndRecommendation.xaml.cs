@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace CustomerService.Views
 {
-    /// <summary>
-    /// Interaction logic for OptimalPackage.xaml
-    /// </summary>
+
     public partial class ClientStatsAndRecommendation : Page
     {
         public ClientStatsAndRecommendation()

@@ -25,11 +25,6 @@ namespace CustomerService.Views
     {
         private int? userId;
 
-        public int? SelectedClientIdNumber
-        {
-            get => ((SelectClientViewModel)DataContext).SelectedClientIdNumber;
-        }
-        
         public SelectClient() : this(null)
         {
         }
@@ -37,6 +32,7 @@ namespace CustomerService.Views
         public SelectClient(int? userId)
         {
             InitializeComponent();
+            //set up view model to call back when client data is ready
             ((SelectClientViewModel)DataContext).AcceptCallBack = OnAccept;
             ((SelectClientViewModel)DataContext).CancelCallBack = OnCancel;
             this.userId = userId;
@@ -44,7 +40,9 @@ namespace CustomerService.Views
 
         private void OnAccept()
         {
-            NavigationService.Navigate(new LineInformation(this.userId, SelectedClientIdNumber));
+            //navigate to LineInformation with client data that we got from the view model
+            int? selectedClientIdNumber = ((SelectClientViewModel)DataContext).SelectedClientIdNumber;
+            NavigationService.Navigate(new LineInformation(this.userId, selectedClientIdNumber));
         }
         private void OnCancel()
         {
@@ -56,9 +54,5 @@ namespace CustomerService.Views
             NavigationService.GoBack();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
-        }
     }
 }

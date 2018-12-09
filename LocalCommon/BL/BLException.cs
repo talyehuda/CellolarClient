@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace LocalCommon.BL
 {
+    /// <summary>
+    /// exception in the BL layer
+    /// </summary>
     public class BLException : Exception
     {
 
@@ -25,6 +28,9 @@ namespace LocalCommon.BL
         }
     }
 
+    /// <summary>
+    /// error from the server, holds specific message
+    /// </summary>
     public class BLServerError : BLException
     {
 
@@ -37,6 +43,10 @@ namespace LocalCommon.BL
         }
     }
 
+
+    /// <summary>
+    /// unexpected error from the server
+    /// </summary>
     public class BLServerUnhandledError : BLException
     {
 

@@ -34,7 +34,7 @@ namespace CustomerService.ViewModels
         {
             clientInfoBL = new ClientInfoBL();
 
-
+            //set up buttons' functions
             _clearCommand = new DelegateCommand(OnClear);
             _deleteCommand = new DelegateCommand(OnDelete, CanDelete);
             _saveCommand = new DelegateCommand(OnSave, CanSave);
@@ -43,13 +43,13 @@ namespace CustomerService.ViewModels
             ResetMessages();
             try
             {
+                //fill in client types
                 _clientTypes = clientInfoBL.GetClientTypes();
                 if (_clientTypes==null)
                     _clientTypes=new List<ClientType>(); 
             }
             catch (Exception ex)
             {
-                
                 SetErrorMessage(ex, "loading client types");
                 return;
                 
@@ -57,6 +57,7 @@ namespace CustomerService.ViewModels
 
             try
             {
+                //fill in client id numbers
                 _clientsIdNumbers = ListToObservableCollection(clientInfoBL.GetClientIdNumbers());
                 if (_clientsIdNumbers==null)
                     _clientsIdNumbers = new ObservableCollection<int>();
@@ -85,6 +86,7 @@ namespace CustomerService.ViewModels
             set
             {
                 SetProperty(ref _currentClient, value);
+                //set client type of current client
                 ClientTypeOfCurrentClient = _currentClient != null ? _clientTypes.FirstOrDefault((ClientType clientType) => (clientType.Id == _currentClient.ClientTypeId)) : null;
 
                 _deleteCommand.InvokeCanExecuteChanged();
@@ -104,6 +106,7 @@ namespace CustomerService.ViewModels
                 {
                     try
                     {
+                        //get client data by selected id
                         CurrentClient = clientInfoBL.GetClientByIdNumber((int)_selectedClientIdNumber);
                     }
                     catch (Exception ex)
@@ -133,6 +136,7 @@ namespace CustomerService.ViewModels
 
                 ResetMessages();
 
+                //save change to current client
                 if (_currentClient != null && _clientTypeOfCurrentClient != null)
                 {
                     _currentClient.ClientTypeId = _clientTypeOfCurrentClient.Id;
@@ -144,7 +148,7 @@ namespace CustomerService.ViewModels
             get => _clientTypes;
         }
 
-        private bool checkFields()
+        private bool CheckFields()
         {
             bool ret = false;
             ResetMessages();
@@ -183,7 +187,7 @@ namespace CustomerService.ViewModels
             if (_clientsIdNumbers.Contains(_currentClient.ClientIdNumber))
             {
                 //perform update operation
-                if (checkFields())
+                if (CheckFields())
                 {
                     try
                     {
@@ -202,7 +206,7 @@ namespace CustomerService.ViewModels
             {
                 //perform insert operation
 
-                if (checkFields())
+                if (CheckFields())
                 {
                     try
                     {
@@ -225,6 +229,7 @@ namespace CustomerService.ViewModels
         {
             return _selectedClientIdNumber != null;
         }
+
         private void OnDelete(object parameter)
         {
             ResetMessages();

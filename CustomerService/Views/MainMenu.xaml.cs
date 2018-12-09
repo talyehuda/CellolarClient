@@ -30,6 +30,8 @@ namespace CustomerService.Views
 
         public MainMenu(int? userId)
         {
+            //get user id from Login window after it's got it from LoginViewModel
+            //so that we'll be able to pass it to needed pages
             InitializeComponent();
             this.userId = userId;
 
@@ -48,6 +50,7 @@ namespace CustomerService.Views
 
         private void btnLineInfo_Click(object sender, RoutedEventArgs e)
         {
+            //pass info about logged user to SelectClient window
             NavigationService.Navigate(new SelectClient(this.userId));
         }
 

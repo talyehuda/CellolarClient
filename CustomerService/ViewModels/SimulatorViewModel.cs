@@ -39,6 +39,7 @@ namespace CustomerService.ViewModels
                 if (SelectedClientIdNumber != null)
                 {
                     try
+                        //get selected client's data by id number
                     {
                         Client client = clientInfoBL.GetClientByIdNumber((int)SelectedClientIdNumber);
                         Lines = lineInfoBL.GetClientLines(client.Id);
@@ -82,6 +83,7 @@ namespace CustomerService.ViewModels
             ResetMessages();
             try
             {
+                //fill in client id numbers
                 ClientIdNumbers = clientInfoBL.GetClientIdNumbers();
             }
             catch (Exception ex)
@@ -99,6 +101,7 @@ namespace CustomerService.ViewModels
                 ResetMessages();
                 try
                 {
+                    //simulate...
                     simulatorBL.Simulate(SimulationParameters);
                     InfoMessage = "Done";
                 }

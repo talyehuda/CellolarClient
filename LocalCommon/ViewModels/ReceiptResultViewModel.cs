@@ -21,6 +21,7 @@ namespace LocalCommon.ViewModels
         private DelegateCommand _exportCommand;
         public ICommand ExportCommand { get => _exportCommand; }
         
+        // makes up a file name string from data in clientInvoice
         private string SuggestFileName(ClientInvoice clientInvoice)
         {
             return  "Invoice_" + clientInvoice.ClientName.Trim().Replace(' ','_') + "_" + clientInvoice.Month + "_" + clientInvoice.Year;
@@ -35,7 +36,7 @@ namespace LocalCommon.ViewModels
 
         private void OnExport(object parameter)
         {
-
+            //show  a file dialog to choose file and file type from
             SaveFileDialog x = new SaveFileDialog
             {
                 Filter = "PDF|*.pdf|Excel|*.xlsx",
@@ -48,8 +49,7 @@ namespace LocalCommon.ViewModels
                 switch (x.FilterIndex)
                 {
                     case 1://PDF
-
-
+                        
                         ErrorMessage = "Export to PDF is not supported yet";
                         return;
                     default://Excel

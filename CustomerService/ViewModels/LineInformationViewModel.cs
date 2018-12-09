@@ -33,12 +33,12 @@ namespace CustomerService.ViewModels
 
         private int? _clientId;
         private int? _clientIdNumber;
-
-        private string _clientAsString;
+        
+        private string _clientAsString;//the displayed client name
         private IList<Line> _lines;
         private Line _selectedLine = null;
 
-        private IList<Package> _packages;
+        private List<Package> _packages;
         private Package _selectedPackage = null;
 
         private Package _currentPackage = null;
@@ -56,6 +56,7 @@ namespace CustomerService.ViewModels
         private double? _currentPackageTotalFixedPrice;
         private string _selectedLineNumber;
 
+        ///<summary>marks when it's needed to add new SelectedNumbers</summary>
         private bool selectedNumbersChanged=false;
         private bool lineChanged = false;
 
@@ -65,6 +66,7 @@ namespace CustomerService.ViewModels
             lineInfoBL = new LineInfoBL();
             clientInfoBL = new ClientInfoBL();
 
+            //set up commands for buttons
             _clearCommand = new DelegateCommand(OnClear);
             _deleteCommand = new DelegateCommand(OnDelete, CanDelete);
             _saveCommand = new DelegateCommand(OnSave, CanSave);
@@ -73,7 +75,7 @@ namespace CustomerService.ViewModels
             ResetMessages();
             try
             {
-                _packages = ListToObservableCollection(lineInfoBL.GetPackages());
+                Packages = lineInfoBL.GetPackages();
             }
             catch (Exception ex)
             {
@@ -81,8 +83,8 @@ namespace CustomerService.ViewModels
                 return;
             }
 
-            if (_packages == null)
-                _packages = new ObservableCollection<Package>();
+            if (Packages == null)
+                Packages = new List<Package>();
             SelectedPackage = null;
 
         }
@@ -105,6 +107,7 @@ namespace CustomerService.ViewModels
             }
         }
 
+        //perform the change of lines list in the view model
         private void EditLineByIdLocally(int lineId, Line newLine)
         {
             try { 
@@ -116,6 +119,7 @@ namespace CustomerService.ViewModels
             catch (Exception) { }
         }
 
+        //remove line from the view model's Lines list
         private void DeleteLineByIdLocally(int id)
         {
             try
@@ -145,10 +149,11 @@ namespace CustomerService.ViewModels
 
                 if (_clientIdNumber != null)
                 {
-
+                    
                     Client client;
                     try
                     {
+                        //get client data
                         client = clientInfoBL.GetClientByIdNumber((int)_clientIdNumber);
                     }
                     catch (Exception ex)
@@ -163,6 +168,7 @@ namespace CustomerService.ViewModels
                     
                     try
                     {
+                        
                         Lines = ListToObservableCollection(lineInfoBL.GetClientLines((int)_clientId));
 
                         if (Lines == null)
@@ -177,9 +183,9 @@ namespace CustomerService.ViewModels
 
                     try
                     {
-                        _packages = ListToObservableCollection(lineInfoBL.GetPackages());
+                        _packages = lineInfoBL.GetPackages();
                         if (_packages == null)
-                            _packages = new ObservableCollection<Package>();
+                            _packages = new List<Package>();
                     }
                     catch (Exception ex)
                     {
@@ -198,7 +204,7 @@ namespace CustomerService.ViewModels
             }
         }
 
-        public IList<Package> Packages { get => _packages;
+        public List<Package> Packages { get => _packages;
             set
             {
                 SetProperty(ref _packages, value);
@@ -221,6 +227,7 @@ namespace CustomerService.ViewModels
                     {
                         try
                         {
+                            //get selectedNumbers of the selected package
                             _selectedPackage.SelectedNumbers = lineInfoBL.GetSelectedNumbersById((int)_selectedPackage.FavouriteNumbers);
                         }
                         catch (Exception ex)
@@ -231,7 +238,9 @@ namespace CustomerService.ViewModels
                         }
                     }
 
-
+                    //make a copy of selected numbers rather than using the original
+                    //so that when selecting same package later we dont see possible changes
+                    //in selected package's selected numbers
                     SelectedNumbers selectedNumbersCopy = (_selectedPackage.SelectedNumbers != null) ?
                         new SelectedNumbers
                         {
@@ -244,6 +253,7 @@ namespace CustomerService.ViewModels
                         new SelectedNumbers();
 
 
+                    //make a copy of current package using the original for similar reason
                     CurrentPackage = new Package
                     {
                         DiscountPercentage = SelectedPackage.DiscountPercentage,
@@ -286,6 +296,7 @@ namespace CustomerService.ViewModels
                     SelectedLineNumber = _selectedLine.Number;
                     if (_selectedLine.PackageId != null) {
                         try { 
+                            //get package of selected line
                             SelectedPackage = lineInfoBL.GetPackageById((int)_selectedLine.PackageId);
                         }
                         catch (Exception ex)
@@ -335,6 +346,7 @@ namespace CustomerService.ViewModels
 
                 if (_currentPackageXminYpriceChecked == false)
                 {
+                    //update relevant check box
                     if (!isEmptyField(CurrentPackageMinutes) || !(isEmptyField(CurrentPackagePrice)))
                         CurrentPackageXminYpriceChecked = true;
                 }
@@ -349,7 +361,7 @@ namespace CustomerService.ViewModels
 
                 if (_currentPackage!=null)
                     _currentPackage.MaxMinute = _currentPackageMinutes;
-
+                //update relevant check box
                 CurrentPackageXminYpriceChecked = (_currentPackagePrice != null || _currentPackageMinutes != null);
 
             }
@@ -364,7 +376,7 @@ namespace CustomerService.ViewModels
                 if (_currentPackage != null)
                     _currentPackage.FixedPrice = _currentPackagePrice;
 
-
+                //update relevant check box
                 CurrentPackageXminYpriceChecked = (_currentPackagePrice != null || _currentPackageMinutes != null);
             }
         }
@@ -380,6 +392,7 @@ namespace CustomerService.ViewModels
 
                 if (_currentPackageDiscountPercentage != null)
                 {
+                    //update relevant check box
                     CurrentPackageFriendsChecked = true;
                 }
             }
@@ -405,6 +418,7 @@ namespace CustomerService.ViewModels
 
                 if (_currentPackageFriendsChecked == false)
                 {
+                    //update relevant check box
                     if (!isEmptyField(CurrentPackageFriendNumber1) || !isEmptyField(CurrentPackageFriendNumber2) || !isEmptyField(CurrentPackageFriendNumber3))
                         CurrentPackageFriendsChecked = true;
                     else if (!isEmptyField(CurrentPackageDiscountPercentage))
@@ -420,17 +434,20 @@ namespace CustomerService.ViewModels
             {
                 if (_currentPackageFriendNumber1 != value)
                 {
+
                     selectedNumbersChanged = true;
                 }
 
                 SetProperty(ref _currentPackageFriendNumber1, value);
 
+                //update current package's data
                 if (_currentPackage!= null)
                     if (_currentPackage.SelectedNumbers != null)
                         _currentPackage.SelectedNumbers.FirstNumber = _currentPackageFriendNumber1;
 
                 if (!isEmptyField(_currentPackageFriendNumber1))
                 {
+                    //update relevant check box
                     CurrentPackageFriendsChecked = true;
                 }
             }
@@ -485,8 +502,10 @@ namespace CustomerService.ViewModels
                 CurrentPackageFriendsChecked = false;
 
                 SetProperty(ref _currentPackageFriendNumbers, value);
+                //update fields
                 if (_currentPackageFriendNumbers != null)
                 {
+                    
                     CurrentPackageFriendNumber1 = _currentPackageFriendNumbers.FirstNumber;
                     CurrentPackageFriendNumber2 = _currentPackageFriendNumbers.SecondNumber;
                     CurrentPackageFriendNumber3 = _currentPackageFriendNumbers.ThirdNumber;
@@ -520,6 +539,9 @@ namespace CustomerService.ViewModels
             }
         }
 
+        /// <summary>
+        /// client's display name
+        /// </summary>
         public string ClientAsString { get => _clientAsString; set => SetProperty(ref _clientAsString, value); }
 
         public Package CurrentPackage
@@ -531,6 +553,7 @@ namespace CustomerService.ViewModels
                 
                 if (_currentPackage != null)
                 {
+                    //update fields
                     CurrentPackageMinutes = _currentPackage.MaxMinute;
                     CurrentPackagePrice = _currentPackage.FixedPrice;
                     CurrentPackageFamilyDiscountChecked = _currentPackage.InsideFamilyCalls;
@@ -581,7 +604,10 @@ namespace CustomerService.ViewModels
 
             return ret;
         }
-        
+
+        /// <summary>
+        /// checks whether to set selected numbers of current package to null or not
+        /// </summary>
         private bool CurrentPackageSelectedNumbersNotEmpty()
         {
             bool ret = false;
@@ -612,11 +638,12 @@ namespace CustomerService.ViewModels
 
                 if (CurrentPackageSelectedNumbersNotEmpty())
                 {
+                    //use current selected numbers' id for package unless new selected numbers are in the fields
                     selectedNumbersId = CurrentPackageFriendNumbers.Id;
 
                     if (selectedNumbersChanged)
                     {
-
+                        //add new selected numbers
                         try
                         {
                             selectedNumbersId =
@@ -650,19 +677,24 @@ namespace CustomerService.ViewModels
                 Line line;
                 if (lineChanged)
                 {
+                    //update line
+
                     line = new Line
                     {
                         ClientId = (int)_clientId,
                         Number = SelectedLineNumber,
                         PackageId = CurrentPackage.Id
                     };
+
                     if (_userId == null)
                     {
+                        //just in case the view model didn't successfully get employee's user id
                         ErrorMessage = "cannot add line - unknown employee";
                         return;
                     }
                     else
                     {
+
                         try
                         {
                             line.Id = lineInfoBL.AddLine(line,(int) _userId);
@@ -679,6 +711,9 @@ namespace CustomerService.ViewModels
                 }
                 else
                 {
+
+                    //add new line
+
                     line = new Line
                     {
                         Id = SelectedLine.Id,

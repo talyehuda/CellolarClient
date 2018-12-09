@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 namespace LocalCommon.DAL
 {
 
+
+    /// <summary>
+    /// exception from the web API access layer
+    /// </summary>
     public class APIException : Exception
     {
         public APIException() : base(null)
@@ -18,12 +22,19 @@ namespace LocalCommon.DAL
         }
     }
 
+    /// <summary>
+    /// connection error from the web api client to the server
+    /// </summary>
     public class APIConnectionError : APIException
     {
         public APIConnectionError() : base(null)
         {
         }
     }
+
+    /// <summary>
+    /// error from the web API server, holds a message from the server
+    /// </summary>
     public class APIServerError : APIException
     {
         public APIServerError() : base(null)
@@ -33,6 +44,10 @@ namespace LocalCommon.DAL
         {
         }
     }
+
+    /// <summary>
+    /// unhandled error status code from the web API server
+    /// </summary>
     public class APIUnhandledHttpStatusCodeException : APIException
     {
         public readonly HttpStatusCode httpStatusCode;

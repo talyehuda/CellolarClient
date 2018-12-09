@@ -18,7 +18,7 @@ namespace LocalCommon.Utils
         {
             ExcelPackage excel = new ExcelPackage();
             excel.Workbook.Worksheets.Add("Client");
-            GetExcelClient(excel, clientInvoice);
+            FillClientData(excel, clientInvoice);
 
             foreach (var item in clientInvoice.LineInvoices)
             {
@@ -28,7 +28,9 @@ namespace LocalCommon.Utils
             SaveAsExcel(excel, FilePath);
         }
 
-
+        /// <summary>
+        /// saves an ExcelPackage object to a file
+        /// </summary>
         private void SaveAsExcel(ExcelPackage excel, string filePath)
         {
             using (excel)
@@ -40,7 +42,10 @@ namespace LocalCommon.Utils
             }
         }
 
-        private void GetExcelClient(ExcelPackage excel, ClientInvoice clientInvoice)
+        /// <summary>
+        /// //opens a worksheet in the ExcelPackage object and fills it with clientInvoice's data
+        /// </summary>
+        private void FillClientData(ExcelPackage excel, ClientInvoice clientInvoice)
         {
             var headerRow = new List<string[]>()
   {
@@ -76,6 +81,10 @@ namespace LocalCommon.Utils
 
         }
 
+
+        /// <summary>
+        /// //opens a new worksheet in the ExcelPackage object and fills it with lineInvoice's data
+        /// </summary>
         private void GetExcelLine(ExcelPackage excel, LineInvoice lineInvoice)
         {
             string nameWorksheets = "Line ";

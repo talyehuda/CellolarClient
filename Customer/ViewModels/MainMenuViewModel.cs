@@ -13,6 +13,7 @@ namespace Customer.ViewModels
     {
         private Login _loginDetails;
 
+        //login details from login dialog in order to be accessed by MainMenu view
         public Login LoginDetails { get => _loginDetails; set => SetProperty(ref _loginDetails, value); }
     }
 }

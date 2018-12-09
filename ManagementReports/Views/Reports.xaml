@@ -94,7 +94,7 @@
                                                     </ItemsControl.ItemsPanel>
                                                     <ItemsControl.ItemTemplate>
                                                         <DataTemplate>
-                                                            <TextBlock Text="{Binding ClientIdNumber}" MinWidth="100"></TextBlock>
+                                                            <TextBlock Text="{Binding}" MinWidth="100"></TextBlock>
                                                         </DataTemplate>
                                                     </ItemsControl.ItemTemplate>
                                                 </ItemsControl>

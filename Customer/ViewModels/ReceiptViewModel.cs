@@ -14,20 +14,6 @@ namespace Customer.ViewModels
 {
     class ReceiptViewModel:ViewModelBase
     {
-        public class SelectableLine:ViewModelBase
-        {
-            public SelectableLine(Line line)
-            {
-                IsSelected = false;
-                _item = line;
-            }
-
-            private Line _item;
-            private bool _isSelected;
-
-            public bool IsSelected { get => _isSelected; set { SetProperty(ref _isSelected, value); } }
-            public Line Item { get => _item; set => SetProperty(ref _item, value); }
-        }
 
         private ClientInfoBL clientInfoBL;
         private LineInfoBL lineInfoBL;
@@ -55,11 +41,13 @@ namespace Customer.ViewModels
             _calculateCommand = new DelegateCommand(OnCalculate, CanCaluclate);
 
 
+            // fill in 12 months for selection
             List<int> months = new List<int>();
             for (int i = 1; i <= 12; i++)
                 months.Add(i);
             Months = months;
 
+            //fill in last 25 years for selection
             List<int> years = new List<int>();
             for (int i = DateTime.Now.Year; i >= DateTime.Now.Year - 25; i--)
                 years.Add(i);
@@ -69,6 +57,7 @@ namespace Customer.ViewModels
 
 
         }
+
 
         private bool CanCaluclate(object parameter)
         {
@@ -106,19 +95,19 @@ namespace Customer.ViewModels
                 
                 try
                 {
+                    //calculate...
                     _clientInvoice = receiptBL.GetClientInvoice(selectedLines,(int)SelectedMonth, (int)SelectedYear);
+                    //pass the calculated invoice back
+                    _acceptCallBack(_clientInvoice);
                 }
                 catch (Exception ex)
                 {
                     SetErrorMessage (ex,"calculating receipts");
-                    return;
                 }
-                _acceptCallBack(_clientInvoice);
-
             }
-            
         }
 
+        //convert List<Line> object to List<SelectableLine>
         private List<SelectableLine> LinesToSelectableLines(List<Line> lines)
         {
             if (lines == null)
@@ -130,6 +119,7 @@ namespace Customer.ViewModels
             return selectableLines;
         }
 
+        //gets List<Line> object from a List<SelectableLine> object where SelectableLine lines are selected
         private List<Line> GetSelectedLines(IEnumerable<SelectableLine> selectableLines)
         {
             if (selectableLines == null)
@@ -144,6 +134,7 @@ namespace Customer.ViewModels
             return lines;
         }
 
+        //activated after the invoice is calculated for the user
         public Func<ClientInvoice, bool> AcceptCallBack { get => _acceptCallBack; set => _acceptCallBack = value; }
 
         public int? ClientId
@@ -157,12 +148,12 @@ namespace Customer.ViewModels
                     ResetMessages();
                     try
                     {
+                        //fill in lines of selected client
                         Lines = LinesToSelectableLines(lineInfoBL.GetClientLines((int)_clientId));
                     }
                     catch (Exception ex)
                     {
                         SetErrorMessage(ex,"loading lines");
-                        return;
                     }
                     
                 }

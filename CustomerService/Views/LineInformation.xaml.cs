@@ -26,6 +26,7 @@ namespace CustomerService.Views
         }
         public LineInformation(int? userId, int? clientIdNumber)
         {
+            //pass information we got from SelectClient client data to the view model
             InitializeComponent();
             var dataContext = ((LineInformationViewModel)DataContext);
             if (dataContext != null)

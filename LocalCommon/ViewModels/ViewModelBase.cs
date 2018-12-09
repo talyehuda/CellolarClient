@@ -10,6 +10,11 @@ using System.Threading.Tasks;
 
 namespace LocalCommon.ViewModels
 {
+    /// <summary>
+    /// an INotifyPropertyChanged object which allows for easy notification to 
+    /// the view about the changed parameter
+    /// </summary>
+
     //source: https://intellitect.com/getting-started-model-view-viewmodel-mvvm-pattern-using-windows-presentation-framework-wpf/
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
@@ -18,7 +23,10 @@ namespace LocalCommon.ViewModels
         protected string _errorMessage;
         protected string _infoMessage;
 
-        protected void SetErrorMessage(System.Exception e, string action)
+        /// <summary>
+        /// set's viewmodel's error message accourding to a given exception
+        /// </summary>
+        protected void SetErrorMessage(Exception e, string action)
         {
             ResetMessages();
             try
@@ -69,6 +77,9 @@ namespace LocalCommon.ViewModels
             }
         }
 
+        /// <summary>
+        /// sets property and notifies view model automatically
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
         protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName]string propertyName = null)
         {
@@ -84,6 +95,10 @@ namespace LocalCommon.ViewModels
 
 
 
+
+        /// <summary>
+        /// convert List object to ObservableCollection so that add/remove operations affect the view
+        /// </summary>
         protected ObservableCollection<T> ListToObservableCollection<T>(List<T> list)
         {
             if (list == null)

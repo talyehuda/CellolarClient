@@ -10,6 +10,9 @@ using Common.ModelToBlClient.Invoice;
 
 namespace CustomerService.BL
 {
+    /// <summary>
+    /// interacts with api server for simulation
+    /// </summary>
     class SimulatorBL:BLBase
     {
 

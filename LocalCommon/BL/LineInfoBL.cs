@@ -55,8 +55,6 @@ namespace LocalCommon.BL
         public int AddLine(Line line,int userId)
         {
             return (int)PostAPIData<int?,Line>($"addline?idemployee={userId}",line);
-
-
         }
 
         public void EditLine(Line line)

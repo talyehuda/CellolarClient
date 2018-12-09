@@ -11,6 +11,9 @@ namespace LocalCommon.BL
     {
         protected WebAPIAccess apiAccess = null;
 
+        /// <summary>
+        /// performs a GET api operation and handles exceptions as needed
+        /// </summary>
         protected void GetAPIData(string query)
         {
             try
@@ -31,7 +34,9 @@ namespace LocalCommon.BL
             }
         }
 
-
+        /// <summary>
+        /// perfoms a GET api operation, returns a Model object and handles exceptions as needed
+        /// </summary>
         protected Model GetAPIData<Model>(string query)
         {
             try
@@ -53,6 +58,10 @@ namespace LocalCommon.BL
             
         }
 
+        /// <summary>
+        /// performs POST api operation to a Model object, returns Result object and handles expections
+        /// as needed
+        /// </summary>
         protected Result PostAPIData<Result, Model>(string query, Model model)
         {
 
@@ -64,6 +73,10 @@ namespace LocalCommon.BL
             {
                 throw new BLConnectionError();
             }
+            catch (APIServerError ex)
+            {
+                throw new BLServerError(ex.Message);
+            }
             catch (APIUnhandledHttpStatusCodeException)
             {
                 throw new BLServerUnhandledError();
@@ -71,6 +84,9 @@ namespace LocalCommon.BL
 
         }
 
+        /// <summary>
+        /// performs POST api operation to a Model object and handles expections as needed
+        /// </summary>
         protected void PostAPIData<Model>(string query, Model model)
         {
 
@@ -81,6 +97,10 @@ namespace LocalCommon.BL
             catch (APIConnectionError)
             {
                 throw new BLConnectionError();
+            }
+            catch (APIServerError ex)
+            {
+                throw new BLServerError(ex.Message);
             }
             catch (APIUnhandledHttpStatusCodeException)
             {

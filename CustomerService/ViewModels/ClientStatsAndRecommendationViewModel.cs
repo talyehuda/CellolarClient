@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 
 namespace CustomerService.ViewModels
 {
-    class ClientStatsAndRecommendationViewModel: StatsAndRecommendationViewModel
+    /// <summary>
+    /// //extension for StatsAndRecommendationViewModel with the ability to select client
+    /// </summary>
+
+    class ClientStatsAndRecommendationViewModel : StatsAndRecommendationViewModel
     {
         private ClientInfoBL clientInfoBL;
         private List<int> _clientIdNumbers;

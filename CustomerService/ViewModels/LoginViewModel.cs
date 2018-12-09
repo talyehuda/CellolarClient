@@ -16,12 +16,15 @@ namespace CustomerService.ViewModels
         private Func<int,bool> _acceptCallBack;
         private DelegateCommand _loginCommand = null;
         public ICommand LoginCommand { get => _loginCommand; }
+        //runs when user presses 'log in'
+        //_acceptCallBack is called on login details of entered user
         public Func<int, bool> AcceptCallBack { get => _acceptCallBack; set => _acceptCallBack = value; }
 
         private int? _loginID = null;
         private string _loginContactNumber = null;
         private LoginBL loginBL;
 
+        //contact id
         public int? LoginID
         {
             get => _loginID;
@@ -32,6 +35,7 @@ namespace CustomerService.ViewModels
             }
         }
 
+        //contact #
         public string LoginContactNumber
         {
             get => _loginContactNumber;
@@ -71,15 +75,16 @@ namespace CustomerService.ViewModels
                 Login loginParams=null;
                 try
                 {
+                    //log in...
                     loginParams = loginBL.LoginAsEmployee((int)_loginID, _loginContactNumber);
+
+                    //return login details
+                    _acceptCallBack(loginParams.UserId);
                 }
                 catch (Exception ex)
                 {
                     SetErrorMessage(ex, "logging in");
-                    return;
                 }
-                
-                _acceptCallBack(loginParams.UserId);
                
             }
         }

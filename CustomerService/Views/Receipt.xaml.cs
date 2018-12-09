@@ -24,20 +24,20 @@ namespace CustomerService.Views
     /// </summary>
     public partial class Receipt : Page
     {
+        //called by MainMenu's click event of Reciept button with
+        //client id = MainMenu.loginDetails.userId
         public Receipt()
         {
             InitializeComponent();
 
+            //set the view model to return back with invoice data by calling our OnAccept()
             ((ReceiptViewModel)DataContext).AcceptCallBack = OnAccept;
         }
-
-        //public List<Common.Model.Receipt> Receipts
-        //{
-        //    get => ((ReceiptViewModel)DataContext).Receipts;
-        //}
+        
         private bool OnAccept(ClientInvoice clientInvoice)
         {
-            
+            //pass invoice data the the ReceiptResult to be passed later on by
+            //ReceiptResult to ReceiptResultViewModel
             NavigationService.Navigate(new ReceiptResult(clientInvoice));
 
             return true;

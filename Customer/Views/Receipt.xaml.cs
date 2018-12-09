@@ -18,15 +18,13 @@ using Common.ModelToBlClient.Invoice;
 
 namespace Customer.Views
 {
-    /// <summary>
-    /// Interaction logic for Receipt.xaml
-    /// </summary>
     public partial class Receipt : Page
     {
         public Receipt() : this(null)
         {
         }
-
+        //called by MainMenu's click event of Reciept button with
+        //client id = MainMenu.loginDetails.userId
         public Receipt(int? clientId)
         {
             InitializeComponent();
@@ -34,14 +32,17 @@ namespace Customer.Views
             var dataContext = ((ReceiptViewModel)DataContext);
             if (dataContext != null)
             {
+                //set the view model to return back with invoice data by calling our OnAccept()
                 dataContext.AcceptCallBack = OnAccept;
+                //set the client id of the view to be what we got from the constructor
                 dataContext.ClientId = clientId;
             }
         }
 
         private bool OnAccept(ClientInvoice clientInvoice)
         {
-            
+            //pass invoice data the the ReceiptResult to be passed later on by
+            //ReceiptResult to ReceiptResultViewModel
             NavigationService.Navigate(new ReceiptResult(clientInvoice));
 
             return true;

@@ -19,9 +19,13 @@ namespace Customer.Views
 {
     /// <summary>
     /// Interaction logic for MainMenu.xaml
+    /// 
+    /// code below allows for navigation between MainMenu and both Receipt and StatsAndRecommendation
+    /// with passing information for relevant view models
     /// </summary>
     public partial class MainMenu : Page
     {
+        //holds info about logged in user
         private Common.ModelToBlClient.Login loginDetails;
 
         public MainMenu():this(null)
@@ -29,6 +33,8 @@ namespace Customer.Views
            
         }
 
+        //called by Login.OnAccept() in order to pass login details to this constructor
+        //OnAccept() is called by LoginViewModel.OnLogin()
         public MainMenu(Common.ModelToBlClient.Login loginDetails)
         {
             InitializeComponent();
@@ -39,11 +45,13 @@ namespace Customer.Views
 
         private void btnReceipt_Click(object sender, RoutedEventArgs e)
         {
+            //pass login details to Receipt view
             NavigationService.Navigate(new Receipt(this.loginDetails.UserId));
         }
         
         private void btnClientStats_Click(object sender, RoutedEventArgs e)
         {
+            //pass login details to StatsAndRecommendation view
             NavigationService.Navigate(new StatsAndRecommendation(this.loginDetails.UserId));
         }
     }

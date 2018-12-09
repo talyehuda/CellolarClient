@@ -1,0 +1,59 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CustomerService.Views"
+      xmlns:ViewModels="clr-namespace:CustomerService.ViewModels" xmlns:Invoice="clr-namespace:Common.ModelToBlClient.Invoice;assembly=Common" x:Class="CustomerService.Views.Simulator"
+      mc:Ignorable="d" 
+      d:DesignHeight="360.881" d:DesignWidth="435.627"
+      Title="Simulator" FontFamily="Microsoft Sans Serif">
+
+
+    <Page.DataContext>
+        <ViewModels:SimulatorViewModel/>
+    </Page.DataContext>
+
+
+    <Grid Background="#FFE5E5E5">
+
+        <DockPanel>
+            <Label DockPanel.Dock="Top" Content="Simulator" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
+
+
+            <Grid Background="White">
+                <Label Content="Client ID" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Label Content="Selected Line" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top"/>
+                <ComboBox ItemsSource="{Binding ClientIdNumbers}" SelectedItem="{Binding SelectedClientIdNumber}" HorizontalAlignment="Left" Margin="131,14,0,0" VerticalAlignment="Top" Width="133"/>
+                <ComboBox ItemsSource="{Binding Lines}" SelectedItem="{Binding SelectedLine}" HorizontalAlignment="Left" Margin="131,58,0,0" VerticalAlignment="Top" Width="133" RenderTransformOrigin="0.708,3.75">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Number}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <Label Content="Min Duration" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top"/>
+                <TextBox Text="{Binding SimulationParameters.MinDuration}" HorizontalAlignment="Left" Height="23" Margin="108,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
+                <Label Content="Max Duration" HorizontalAlignment="Left" Margin="223,111,0,0" VerticalAlignment="Top"/>
+                <TextBox Text="{Binding SimulationParameters.MaxDuration}" HorizontalAlignment="Left" Height="23" Margin="316,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
+                <Label Content="Number of Calls/SMS" HorizontalAlignment="Left" Margin="10,178,0,0" VerticalAlignment="Top"/>
+                <TextBox Text="{Binding SimulationParameters.NumberOfCallsOrSMS}" HorizontalAlignment="Left" Height="23" Margin="154,182,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
+                <CheckBox IsChecked="{Binding SimulationParameters.SMS}" Content="SMS" HorizontalAlignment="Left" Margin="332,184,0,0" VerticalAlignment="Top"/>
+                <Label Content="Send To" HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top"/>
+                <ComboBox HorizontalAlignment="Left" SelectedItem="{Binding SimulationParameters.SendToOptions}" Margin="154,226,0,0" VerticalAlignment="Top" Width="133" RenderTransformOrigin="0.708,3.75">
+                    <Invoice:SendToOptions>Friends</Invoice:SendToOptions>
+                    <Invoice:SendToOptions>Family</Invoice:SendToOptions>
+                    <Invoice:SendToOptions>General</Invoice:SendToOptions>
+                    <Invoice:SendToOptions>All</Invoice:SendToOptions>
+                </ComboBox>
+                <Button Command="{Binding SimulateCommand}" Content="Simulate" HorizontalAlignment="center" Margin="0,0,0,10"  Grid.Row="2" VerticalAlignment="Bottom"  MinWidth="75"/>
+                <Label HorizontalAlignment="Left" Content="{Binding ErrorMessage}" Margin="11,264,0,0"  VerticalAlignment="Top" Foreground="Red"/>
+                <Label HorizontalAlignment="Left" Content="{Binding InfoMessage}" Margin="11,264,0,0" VerticalAlignment="Top" Foreground="DarkBlue"/>
+            </Grid>
+
+
+
+        </DockPanel>
+    </Grid>
+</Page>

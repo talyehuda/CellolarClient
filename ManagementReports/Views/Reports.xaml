@@ -1,0 +1,116 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ManagementReports.Views"
+      xmlns:ViewModels="clr-namespace:ManagementReports.ViewModels" x:Class="ManagementReports.Views.Reports"
+      mc:Ignorable="d" 
+      d:DesignHeight="415" d:DesignWidth="473"
+      Title="Reports">
+
+    <Page.DataContext>
+        <ViewModels:ReportsViewModel/>
+    </Page.DataContext>
+
+    <Grid Background="#FFE5E5E5">
+
+        <DockPanel>
+            <Label DockPanel.Dock="Top" Content="Management Reports" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
+            <Grid Background="White">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="0,0,0,42">
+                    <Label>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Statistics" FontWeight="Bold"/>
+                            <TextBlock/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="75"/>
+                                    <ColumnDefinition Width="125"/>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Most Value  "/>
+                                    <ItemsControl ItemsSource="{Binding BiReport.MostValueClients, TargetNullValue='-'}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding ClientIdNumber}"></TextBlock>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Vertical">
+                                    <TextBlock Text="(Last month value)" Foreground="DarkSlateGray"/>
+                                    <ItemsControl ItemsSource="{Binding BiReport.TopClientsLastMonthMostValue, TargetNullValue='-'}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}"></TextBlock>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Orientation="Vertical">
+                                    <TextBlock Text="Most Calling to Center"/>
+                                    <ItemsControl ItemsSource="{Binding BiReport.MostCallingToCenterClients, TargetNullValue='-'}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding ClientIdNumber}"></TextBlock>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                                <StackPanel Grid.Column="3" Orientation="Vertical">
+                                    <TextBlock Text="Best Sellers"/>
+                                    <ItemsControl ItemsSource="{Binding BiReport.BestSellers, TargetNullValue='-'}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock><Run Text="{Binding Name}"/><Run Text=" "/><Run Text="{Binding LastName}"/></TextBlock>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </Grid>
+                            <TextBlock/>
+                            <TextBlock/>
+                            <TextBlock Text="Groups" FontWeight="Bold"/>
+                            <TextBlock/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <ItemsControl Grid.Column="1" ItemsSource="{Binding BiReport.PotentialGrougs}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="Potential Group" FontWeight="Bold"/>
+
+                                                <ItemsControl ItemsSource="{Binding}">
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <StackPanel Orientation="Horizontal"></StackPanel>
+                                                        </ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding ClientIdNumber}" MinWidth="100"></TextBlock>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Grid>
+
+                        </StackPanel>
+                    </Label>
+                </ScrollViewer>
+                <Label Content="{Binding ErrorMessage}" Foreground="Red" HorizontalAlignment="Left" Margin="10,337,0,0" VerticalAlignment="Top"/>
+            </Grid>
+        </DockPanel>
+
+    </Grid>
+</Page>

@@ -1,0 +1,46 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CustomerService.Views"
+      xmlns:ViewModels="clr-namespace:CustomerService.ViewModels" x:Class="CustomerService.Views.Receipt"
+      mc:Ignorable="d" 
+      d:DesignHeight="212" d:DesignWidth="300"
+      Title="Receipt">
+    <Page.DataContext>
+        <ViewModels:ReceiptViewModel/>
+    </Page.DataContext>
+    <Grid>
+
+        <Grid Background="#FFE5E5E5">
+
+            <DockPanel>
+                <Label DockPanel.Dock="Top" Content="Receipt" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <Grid Background="White">
+                    <Label Content="Select Client ID" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <ComboBox ItemsSource="{Binding ClientIdNumbers}" SelectedItem="{Binding SelectedClientIdNumber}" HorizontalAlignment="Left" Margin="105,14,0,0" VerticalAlignment="Top" Width="147"/>
+                    <ComboBox ItemsSource="{Binding Lines}" HorizontalAlignment="Left"  Margin="105,41,0,0" VerticalAlignment="Top" Width="147">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding Item.Number}"></CheckBox>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Label Content="Select Line(s)" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Select Month" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top"/>
+                    <Button Command="{Binding CalculateCommand}" Content="Calculate" HorizontalAlignment="Left" Margin="105,133,0,0" VerticalAlignment="Top" Width="75"/>
+                    <ComboBox ItemsSource="{Binding Months}" SelectedItem="{Binding SelectedMonth}" HorizontalAlignment="Left" Margin="105,68,0,0" VerticalAlignment="Top" Width="47">
+                    </ComboBox>
+                    <Label Content="Year:" HorizontalAlignment="Left" Margin="157,64,0,0" VerticalAlignment="Top"/>
+                    <ComboBox ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" HorizontalAlignment="Left" Margin="197,68,0,0" VerticalAlignment="Top" Width="55"/>
+                    <Label HorizontalAlignment="Left" Content="{Binding ErrorMessage}" Margin="10,95,0,0"  VerticalAlignment="Top" Foreground="Red"/>
+                    <Label HorizontalAlignment="Left" Content="{Binding InfoMessage}" Margin="10,95,0,0" VerticalAlignment="Top" Foreground="DarkBlue"/>
+                </Grid>
+            </DockPanel>
+
+        </Grid>
+    </Grid>
+</Page>

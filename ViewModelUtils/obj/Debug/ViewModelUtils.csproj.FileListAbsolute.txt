@@ -1,0 +1,9 @@
+C:\Users\DELL\source\repos\WpfApp1\ViewModelUtils\bin\Debug\ViewModelUtils.dll
+C:\Users\DELL\source\repos\WpfApp1\ViewModelUtils\bin\Debug\ViewModelUtils.pdb
+C:\Users\DELL\source\repos\WpfApp1\ViewModelUtils\obj\Debug\ViewModelUtils.csprojResolveAssemblyReference.cache
+C:\Users\DELL\source\repos\WpfApp1\ViewModelUtils\obj\Debug\ViewModelUtils.csproj.CoreCompileInputs.cache
+C:\Users\DELL\source\repos\WpfApp1\ViewModelUtils\obj\Debug\ViewModelUtils.dll
+C:\Users\DELL\source\repos\WpfApp1\ViewModelUtils\obj\Debug\ViewModelUtils.pdb
+C:\Users\DELL\source\repos\WpfApp1\ViewModelUtils\bin\Debug\Common.dll
+C:\Users\DELL\source\repos\WpfApp1\ViewModelUtils\bin\Debug\Common.pdb
+C:\Users\DELL\source\repos\WpfApp1\ViewModelUtils\bin\Debug\Common.dll.config

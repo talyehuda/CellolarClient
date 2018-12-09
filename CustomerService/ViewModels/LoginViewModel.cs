@@ -45,20 +45,23 @@ namespace CustomerService.ViewModels
         {
             loginBL = new LoginBL();
 
-            _loginCommand = new DelegateCommand(OnLogin,CanLogin);
+            _loginCommand = new DelegateCommand(OnLogin);
         }
 
-        private bool CanLogin(object parameter)
-        {
-            if (_loginID == null)
-                return false;
-            else
-                return true;
-        }
+
 
         private bool CheckFields()
         {
-            return true;
+            ResetMessages();
+            bool ret = false;
+            string STR_REQ_FIELD = "Required field: ";
+            if (_loginID == null)
+                ErrorMessage = STR_REQ_FIELD + "id";
+            else if (_loginContactNumber == null)
+                ErrorMessage = STR_REQ_FIELD + "contact #";
+            else
+                ret = true;
+            return ret;
         }
 
         private void OnLogin(object parameter)

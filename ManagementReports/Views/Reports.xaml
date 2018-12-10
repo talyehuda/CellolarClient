@@ -31,7 +31,7 @@
                                     <ColumnDefinition Width="100"/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="Most Value  "/>
+                                    <TextBlock Text="Most Value" FontWeight="SemiBold"/>
                                     <ItemsControl ItemsSource="{Binding BiReport.MostValueClients, TargetNullValue='-'}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
@@ -41,7 +41,7 @@
                                     </ItemsControl>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Orientation="Vertical">
-                                    <TextBlock Text="(Last month value)" Foreground="DarkSlateGray"/>
+                                    <TextBlock Text="(Last month value)" FontWeight="SemiBold" Foreground="DarkSlateGray"/>
                                     <ItemsControl ItemsSource="{Binding BiReport.TopClientsLastMonthMostValue, TargetNullValue='-'}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
@@ -51,7 +51,7 @@
                                     </ItemsControl>
                                 </StackPanel>
                                 <StackPanel Grid.Column="2" Orientation="Vertical">
-                                    <TextBlock Text="Most Calling to Center"/>
+                                    <TextBlock Text="Most Calling to Center" FontWeight="SemiBold"/>
                                     <ItemsControl ItemsSource="{Binding BiReport.MostCallingToCenterClients, TargetNullValue='-'}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>
@@ -61,7 +61,7 @@
                                     </ItemsControl>
                                 </StackPanel>
                                 <StackPanel Grid.Column="3" Orientation="Vertical">
-                                    <TextBlock Text="Best Sellers"/>
+                                    <TextBlock Text="Best Sellers" FontWeight="SemiBold"/>
                                     <ItemsControl ItemsSource="{Binding BiReport.BestSellers, TargetNullValue='-'}">
                                         <ItemsControl.ItemTemplate>
                                             <DataTemplate>

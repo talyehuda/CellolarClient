@@ -29,3 +29,14 @@ C:\Users\DELL\Documents\git\CellolarClient\Common\obj\Debug\Common.csprojResolve
 C:\Users\DELL\Documents\git\CellolarClient\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
 C:\Users\DELL\Documents\git\CellolarClient\Common\obj\Debug\Common.dll
 C:\Users\DELL\Documents\git\CellolarClient\Common\obj\Debug\Common.pdb
+C:\Users\DELL\Documents\github\CellolarClient\Common\bin\Debug\Common.dll.config
+C:\Users\DELL\Documents\github\CellolarClient\Common\bin\Debug\Common.dll
+C:\Users\DELL\Documents\github\CellolarClient\Common\bin\Debug\Common.pdb
+C:\Users\DELL\Documents\github\CellolarClient\Common\bin\Debug\EntityFramework.dll
+C:\Users\DELL\Documents\github\CellolarClient\Common\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\DELL\Documents\github\CellolarClient\Common\bin\Debug\EntityFramework.xml
+C:\Users\DELL\Documents\github\CellolarClient\Common\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\DELL\Documents\github\CellolarClient\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Users\DELL\Documents\github\CellolarClient\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\DELL\Documents\github\CellolarClient\Common\obj\Debug\Common.dll
+C:\Users\DELL\Documents\github\CellolarClient\Common\obj\Debug\Common.pdb

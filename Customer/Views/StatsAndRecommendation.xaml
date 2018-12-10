@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Customer.Views"
       xmlns:ViewModels="clr-namespace:LocalCommon.ViewModels;assembly=LocalCommon" x:Class="Customer.Views.StatsAndRecommendation"
       mc:Ignorable="d" 
-      d:DesignHeight="397.95" d:DesignWidth="375"
+      d:DesignHeight="397.95" d:DesignWidth="516"
       Title="StatsAndRecommendation">
 
     <Page.DataContext>
@@ -62,7 +62,8 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="76"/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
@@ -77,6 +78,10 @@
                                 <TextBlock FontWeight="Bold" Text="Price: "/>
                                 <TextBlock FontWeight="Bold" Text="{Binding ClientStats.Recommendation1.PackagePrice, TargetNullValue='-'}"/>
                             </StackPanel>
+                            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                <TextBlock FontWeight="Bold" Text="Price for Last Month: "/>
+                                <TextBlock FontWeight="Bold" Text="{Binding ClientStats.Recommendation1.PriceForLastMonth, TargetNullValue='-'}"/>
+                            </StackPanel>
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
                                 <TextBlock Text="Package "/>
                                 <TextBlock Text="{Binding ClientStats.Recommendation2.PackageName, TargetNullValue='-'}"/>
@@ -85,6 +90,10 @@
                                 <TextBlock Text="Price: "/>
                                 <TextBlock Text="{Binding ClientStats.Recommendation2.PackagePrice, TargetNullValue='-'}"/>
                             </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
+                                <TextBlock Text="Price for Last Month: "/>
+                                <TextBlock Text="{Binding ClientStats.Recommendation2.PriceForLastMonth, TargetNullValue='-'}"/>
+                            </StackPanel>
                             <StackPanel Grid.Row="2" Orientation="Horizontal">
                                 <TextBlock Text="Package "/>
                                 <TextBlock Text="{Binding ClientStats.Recommendation3.PackageName, TargetNullValue='-'}"/>
@@ -92,6 +101,10 @@
                             <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
                                 <TextBlock Text="Price: "/>
                                 <TextBlock Text="{Binding ClientStats.Recommendation3.PackagePrice, TargetNullValue='-'}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal">
+                                <TextBlock Text="Price for Last Month: "/>
+                                <TextBlock Text="{Binding ClientStats.Recommendation3.PriceForLastMonth, TargetNullValue='-'}"/>
                             </StackPanel>
                         </Grid>
 

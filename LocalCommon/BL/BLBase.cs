@@ -59,7 +59,7 @@ namespace LocalCommon.BL
         }
 
         /// <summary>
-        /// performs POST api operation to a Model object, returns Result object and handles expections
+        /// performs POST api operation to a Model object, returns Result object and handles exceptions
         /// as needed
         /// </summary>
         protected Result PostAPIData<Result, Model>(string query, Model model)
@@ -85,7 +85,7 @@ namespace LocalCommon.BL
         }
 
         /// <summary>
-        /// performs POST api operation to a Model object and handles expections as needed
+        /// performs POST api operation to a Model object and handles exceptions as needed
         /// </summary>
         protected void PostAPIData<Model>(string query, Model model)
         {

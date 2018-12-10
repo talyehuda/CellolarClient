@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\DELL\Documents\git\CellolarClient\CustomerService\obj\Debug\
+C:\Users\DELL\Documents\github\CellolarClient\CustomerService\obj\Debug\
 CustomerService
 none
 false
 DEBUG;TRACE
-C:\Users\DELL\Documents\git\CellolarClient\CustomerService\Views\App.xaml
+C:\Users\DELL\Documents\github\CellolarClient\CustomerService\Views\App.xaml
 10-700611247
 
 261988702941
-20-866221073
+201934839848
 Views\ClientInformation.xaml;Views\LineInformation.xaml;Views\Login.xaml;Views\MainMenu.xaml;Views\MainWindow.xaml;Views\ClientStatsAndRecommendation.xaml;Views\Receipt.xaml;Views\ReceiptResult.xaml;Views\SelectClient.xaml;Views\Simulator.xaml;
 
 True

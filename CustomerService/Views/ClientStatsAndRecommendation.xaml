@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:CustomerService.Views"
       xmlns:ViewModels="clr-namespace:CustomerService.ViewModels" x:Class="CustomerService.Views.ClientStatsAndRecommendation"
       mc:Ignorable="d" 
-      d:DesignHeight="415.95" d:DesignWidth="375"
+      d:DesignHeight="415.95" d:DesignWidth="460.334"
       Title="ClientStatsAndRecommendation">
 
     <Page.DataContext>
@@ -67,9 +67,9 @@
                         <TextBlock FontWeight="Bold" Text="Recommendation"/>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="125"/>
-                                <ColumnDefinition Width="75"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="76"/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*"/>
